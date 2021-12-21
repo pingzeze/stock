@@ -38,6 +38,7 @@ def load_highpoint():
 def get_gusuan(stockid):
     response = requests.get("http://fundgz.1234567.com.cn/js/{0}.js?rt=1639496117358".format(stockid), headers=headers)
     # print(response.text)
+    response.encoding = 'utf-8'
     jsonpgz = response.text
     list1 = jsonpgz.split(",")[4][-7:-2]
     list2 = jsonpgz.split(",")[6][-20:-4]
@@ -46,6 +47,7 @@ def get_gusuan(stockid):
 def get_info(stockid):
     response = requests.get("http://fund.eastmoney.com/{0}.html?spm=aladin".format(stockid), headers=headers)
     html = response.content.decode("utf-8")
+    # html = response.content.decode("gbk")
     soup = BeautifulSoup(html, "html.parser")
     # print(soup)
     net_worth2 = str(soup.find_all(name='td', attrs={'class': 'alignRight bold'})[-22])[-11:-5]
