@@ -44,12 +44,15 @@ def get_gusuan(stockid):
     list2 = jsonpgz.split(",")[6][-20:-4]
     print("{0}基金估值{1}".format(list2, list1))
 
+
 def get_info(stockid):
     response = requests.get("http://fund.eastmoney.com/{0}.html?spm=aladin".format(stockid), headers=headers)
-    html = response.content.decode("utf-8")
+    # print(response.status_code)
+    html = response.content.decode("utf-8", "ignore")
     # html = response.content.decode("gbk")
     soup = BeautifulSoup(html, "html.parser")
     # print(soup)
+    # print(str(soup.find_all(name='td', attrs={'class': 'alignRight bold'})[-22]))
     net_worth2 = str(soup.find_all(name='td', attrs={'class': 'alignRight bold'})[-22])[-11:-5]
     net_worth1 = str(soup.find_all(name='td', attrs={'class': 'alignRight bold'})[-20])[-11:-5]
     # print(net_worth1)
