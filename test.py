@@ -43,6 +43,7 @@ def get_gusuan(stockid):
     list1 = jsonpgz.split(",")[4][-7:-2]
     list2 = jsonpgz.split(",")[6][-20:-4]
     print("{0}基金估值{1}".format(list2, list1))
+    return list1
 
 
 def get_info(stockid):
@@ -70,10 +71,13 @@ def get_info(stockid):
         stockname = dict[stockid][0]
         highpoint = dict[stockid][1]
         exppoint = float(highpoint) * 0.96
+    # jiangfu = 100 - list1 / float(highpoint) * 100
     print(
-        "**{0}  历史最高值：{1}\n******如果跌于最高值4%即 {4} 考虑买入******\n{2} 单位净值：{3}".format(stockname, highpoint, day2, net_worth2,
+        "**{0}  历史最高值：{1}\n******如果跌于最高值4%即 {4} 考虑买入******\n{2} 单位净值：{3}".format(stockname, highpoint, day2,
+                                                                                 net_worth2,
                                                                                  exppoint))
-    print("{2} 单位净值：{3}\n".format(stockname, highpoint, day1, net_worth1))
+    print("{2} 单位净值：{3}".format(stockname, highpoint, day1, net_worth1))
+    return highpoint
 
 
 if __name__ == '__main__':
@@ -82,8 +86,10 @@ if __name__ == '__main__':
     countavg()
     dict = load_highpoint()
     for key in dict.keys():
-        get_gusuan(key)
-        get_info(key)
+        list1 = get_gusuan(key)
+        highpoint = get_info(key)
+        jiangfu = round(100 - float(list1) / float(highpoint) * 100, 5)
+        print("降幅：{0}%\n".format(jiangfu))
     with open(path, "w", encoding='utf-8') as f:
         yaml.dump(dict, f, allow_unicode=True)
     # get_info("110013")
