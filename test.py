@@ -8,7 +8,8 @@ projectpath = os.path.abspath('.')
 sep = os.sep
 path = sep.join([projectpath, "highpoint.yml"])
 headers = {
-    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.93 Safari/537.36"
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.127 Safari/537.36",
+    "Cookie": "_ga=GA1.2.1704929161.1639296721; JSESSIONID=A6A7FF00666CE361AE01D3890EB778C7; Hm_lvt_4064402dbf370b44e70272f9f2632a67=1650812129; _gid=GA1.2.425295259.1650812129; _gat_gtag_UA_117119777_1=1; Hm_lpvt_4064402dbf370b44e70272f9f2632a67=1650812826"
 }
 
 
